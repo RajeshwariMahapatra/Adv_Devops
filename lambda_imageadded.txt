@@ -1,0 +1,53 @@
+To create a Lambda function that logs "image has been added" when an object is added to a specific S3 bucket, follow these steps:
+
+1. **Login to AWS Console:**
+   Log in to your AWS Management Console.
+
+2. **Create a Lambda Function:**
+   - Navigate to the AWS Lambda service.
+   - Click on the "Create function" button.
+
+3. **Configure Function:**
+   - Choose "Author from scratch."
+   - Give your function a name, such as "ImageAddedToS3LogFunction."
+   - For the runtime, choose the appropriate runtime for your function, like Python, Node.js, etc.
+   - Choose or create an execution role that grants the necessary permissions for your Lambda function to access S3. You can create a new role if needed.
+
+4. **Function Code:**
+   - In the function code section, you can paste the following code as the handler function:
+   
+   For Node.js:
+   ```javascript
+   exports.handler = async (event) => {
+       console.log("Image has been added to the S3 bucket.");
+       return "Image has been added to the S3 bucket.";
+   };
+   ```
+
+   For Python:
+   ```python
+   import json
+   
+   def lambda_handler(event, context):
+       print("Image has been added to the S3 bucket.")
+       return "Image has been added to the S3 bucket."
+   ```
+
+5. **Trigger Configuration:**
+   - Click on "Add trigger" to configure a trigger for your Lambda function.
+   - Choose "S3" as the trigger source.
+   - Configure the trigger settings:
+     - Select the S3 bucket where you want to monitor object additions.
+     - Choose the specific event type you want to trigger the Lambda function. In your case, select "All object create events."
+     - Set the prefix and suffix if you want to filter objects based on their names.
+     - Enable the trigger.
+
+6. **Basic Settings:**
+   - You can adjust the memory and timeout settings according to your requirements.
+
+7. **Create Function:**
+   - Click the "Create function" button to create your Lambda function.
+
+Now, your Lambda function is set up to trigger whenever an object is added to the specified S3 bucket. When the trigger occurs, it will log "Image has been added to the S3 bucket" to the CloudWatch Logs associated with the Lambda function.
+
+Remember to adjust the code and trigger settings to match your specific use case, such as the S3 bucket name, event type, and the message you want to log.
